@@ -8,77 +8,8 @@ import { BeneficioService } from '../../services/beneficio.service';
   selector: 'app-lista-beneficios',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="container">
-      <h2>Benefícios</h2>
-
-      <button class="btn btn-primary mb-3" (click)="novoBeneficio()">
-        Novo Benefício
-      </button>
-
-      <div class="row" *ngIf="loading">
-        <div class="col-12">
-          <div class="alert alert-info">Carregando...</div>
-        </div>
-      </div>
-
-      <div class="row" *ngIf="error">
-        <div class="col-12">
-          <div class="alert alert-danger">{{ error }}</div>
-        </div>
-      </div>
-
-      <div class="row" *ngIf="!loading && !error">
-        <div class="col-12">
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nome</th>
-                  <th>Descrição</th>
-                  <th>Valor</th>
-                  <th>Ativo</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let beneficio of beneficios">
-                  <td>{{ beneficio.id }}</td>
-                  <td>{{ beneficio.nome }}</td>
-                  <td>{{ beneficio.descricao }}</td>
-                  <td>R$ {{ beneficio.valor | number:'1.2-2' }}</td>
-                  <td>
-                    <span class="badge" [ngClass]="beneficio.ativo ? 'bg-success' : 'bg-danger'">
-                      {{ beneficio.ativo ? 'Ativo' : 'Inativo' }}
-                    </span>
-                  </td>
-                  <td>
-                    <button class="btn btn-sm btn-outline-primary me-2"
-                            (click)="editarBeneficio(beneficio.id!)">
-                      Editar
-                    </button>
-                    <button class="btn btn-sm btn-outline-danger me-2"
-                            (click)="deletarBeneficio(beneficio.id!)">
-                      Deletar
-                    </button>
-                    <button class="btn btn-sm btn-outline-info"
-                            (click)="transferir(beneficio.id!)">
-                      Transferir
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  `,
-  styles: [`
-    .container { margin-top: 20px; }
-    .table { margin-top: 20px; }
-  `]
+  templateUrl: './lista-beneficios.component.html',
+  styleUrls: ['./lista-beneficios.component.scss']
 })
 export class ListaBeneficiosComponent implements OnInit {
   beneficios: Beneficio[] = [];
